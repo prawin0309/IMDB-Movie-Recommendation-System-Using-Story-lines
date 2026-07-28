@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+.env
+
+# Streamlit
+.streamlit/secrets.toml
+
+# Generated model artefacts - rebuilt by `python models.py`
+artifacts/*.pkl
+
+# Local databases - rebuilt by `python data_pipeline.py`
+*.sqlite3
+*.db
+
+# Generated source data - rebuilt deterministically (seed 42) by the pipeline
+data/yaml_monthly/
+
+# Logs and OS noise
+run_log.txt
+*.log
+.DS_Store
+.ipynb_checkpoints/
