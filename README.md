@@ -119,8 +119,8 @@ movies (
 
 ```bash
 # 1. Clone and enter the project
-git clone https://github.com/<your-username>/IMDB_Movie_Recommendation_System.git
-cd IMDB_Movie_Recommendation_System
+git clone https://github.com/prawin0309/IMDB-Movie-Recommendation-System-Using-Story-lines.git
+cd IMDB-Movie-Recommendation-System-Using-Story-lines
 
 # 2. Create and activate a virtual environment
 python -m venv .venv
