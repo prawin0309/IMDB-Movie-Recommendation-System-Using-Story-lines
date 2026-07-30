@@ -5,3 +5,4 @@ selenium>=4.20
 streamlit>=1.36
 plotly>=5.20
 mysql-connector-python>=8.3
+matplotlib>=3.8

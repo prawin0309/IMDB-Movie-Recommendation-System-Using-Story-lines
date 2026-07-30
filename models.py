@@ -25,6 +25,8 @@ import numpy as np
 import pandas as pd
 from sklearn.cluster import KMeans
 from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
+import json
+
 from sklearn.metrics import silhouette_score
 from sklearn.metrics.pairwise import cosine_similarity
 
@@ -35,6 +37,7 @@ VECTORISER_PKL = config.ARTIFACT_DIR / "tfidf_vectorizer.pkl"
 MATRIX_PKL = config.ARTIFACT_DIR / "tfidf_matrix.pkl"
 SIMILARITY_PKL = config.ARTIFACT_DIR / "cosine_similarity.pkl"
 KMEANS_PKL = config.ARTIFACT_DIR / "topic_kmeans.pkl"
+TOPIC_METRICS_JSON = config.ARTIFACT_DIR / "topic_metrics.json"
 TITLE_INDEX_PKL = config.ARTIFACT_DIR / "title_index.pkl"
 
 
@@ -99,6 +102,13 @@ def train(frame: pd.DataFrame | None = None) -> dict:
     save_artifact(similarity, SIMILARITY_PKL)
     save_artifact(kmeans, KMEANS_PKL)
     save_artifact(title_index, TITLE_INDEX_PKL)
+
+    # Persist the clustering quality so the UI can state it honestly instead of
+    # presenting the topics as if they were well separated.
+    TOPIC_METRICS_JSON.write_text(
+        json.dumps({"n_clusters": n_clusters, "silhouette": score}, indent=2),
+        encoding="utf-8",
+    )
 
     print(f"[cluster] k={n_clusters}  silhouette={score:.4f}")
     print(f"[similarity] mean off-diagonal similarity = {similarity.mean():.4f}")

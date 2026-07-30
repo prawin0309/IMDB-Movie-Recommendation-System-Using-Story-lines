@@ -12,6 +12,8 @@ Run::
 
 from __future__ import annotations
 
+import json
+
 import pandas as pd
 import plotly.express as px
 import streamlit as st
@@ -167,6 +169,23 @@ def page_clusters(corpus: pd.DataFrame) -> None:
     labelled = models.cluster_frame(corpus)
     sizes = labelled["topic"].value_counts().reset_index()
     sizes.columns = ["topic", "movies"]
+
+    # Be explicit about how weak this structure is. TF-IDF vectors over short
+    # storylines are extremely sparse, so KMeans finds only marginal
+    # separation. The groups below are a browsing aid, not a claim that the
+    # corpus contains eight distinct genres.
+    if models.TOPIC_METRICS_JSON.exists():
+        topic_metrics = json.loads(
+            models.TOPIC_METRICS_JSON.read_text(encoding="utf-8")
+        )
+        st.warning(
+            f"Silhouette score **{topic_metrics['silhouette']:.4f}** across "
+            f"{topic_metrics['n_clusters']} clusters. A value this close to "
+            "zero means the topics are only marginally separated - TF-IDF "
+            "vectors over short storylines are too sparse for clean "
+            "clustering. Treat these groups as a browsing aid, not as "
+            "well-defined genres. The recommender itself does not use them."
+        )
 
     st.plotly_chart(
         px.bar(sizes, x="movies", y="topic", orientation="h", color="movies",
