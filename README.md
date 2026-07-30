@@ -106,6 +106,42 @@ movies (
 
 ---
 
+## Project Metadata
+
+| Field | Detail |
+|---|---|
+| **Domain** | Media & Entertainment / Recommender Systems |
+| **Skills demonstrated** | Python · Selenium web scraping · text cleaning and stop-word removal · TF-IDF vectorisation · cosine similarity · KMeans topic clustering · SQL · Streamlit · Plotly |
+| **Technical tags** | `python` `streamlit` `selenium` `web-scraping` `nlp` `tfidf` `cosine-similarity` `recommender-system` `mysql` |
+| **Dataset** | `data/imdb_2024_movies.csv` — 995 titles with storylines, scraped from the IMDb 2024 advanced-search listing as the project brief requires, and committed so the project runs without re-scraping. |
+
+### Business Use Cases
+
+* Recommend films by what a story is about rather than by genre label alone.
+* Surface near-duplicate or derivative storylines across a catalogue.
+* Group titles into editorial browsing facets discovered from the text itself.
+* Handle cold-start recommendations for a new title that has no ratings yet.
+
+### Project Evaluation Metrics
+
+| Component | Metric | Achieved |
+|---|---|---|
+| Corpus | Titles with usable storylines | 995 of 1,000 scraped cards |
+| Vectorisation | TF-IDF matrix shape / non-zeros | 995 × 2,961 / 14,603 |
+| Similarity | Mean off-diagonal cosine similarity | 0.0093 |
+| Topic clustering | Silhouette score | 0.0029 across 8 clusters |
+
+### Project Deliverables
+
+* `data_pipeline.py` — Selenium scraper, text cleaning and SQL load
+* `models.py` — TF-IDF fit, cosine-similarity matrix and topic clustering
+* `app.py` — Streamlit recommender with free-text storyline search
+* `artifacts/*.pkl` — vectoriser, similarity matrix and cluster model
+* `data/imdb_2024_movies.csv` and `data/cleaned_movies.csv`
+* `reports/figures/*.png` — the required visualisations
+
+---
+
 ## 2. How to Execute the Project
 
 ### Prerequisites
@@ -303,3 +339,21 @@ Pairwise cosine similarity, and the best match found for each movie. Absolute sc
 Topic cluster sizes. Silhouette is 0.0029, so these are presented as browsing facets, not genre boundaries.
 
 <!-- FIGURES:END -->
+
+---
+
+## Author
+
+**Prawin**
+GitHub: [@prawin0309](https://github.com/prawin0309) · Email: prawin0309@gmail.com
+
+## Demo Video
+
+A recorded walkthrough of the running application is required for submission.
+Add the link here once the recording is uploaded:
+
+`Demo video: <paste LinkedIn / Google Drive link here>`
+
+## License
+
+Released under the MIT License. See [LICENSE](LICENSE) for the full text.
